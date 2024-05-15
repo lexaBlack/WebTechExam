@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Welcome to Volkswagen</title>
+    <link rel="icon" type="image/png"  href="/css/images/vw_logo.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styles */
+        nav {
+            background-color: #001e50;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        nav a.navbar-brand,
+        nav a.nav-link {
+            color: #ffffff;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a.nav-link:hover {
+            color: #e28743; /* Changed the hover color */
+        }
+
+        nav a.nav-link.register-link {
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            border-radius: 5px;
+            padding: 5px 10px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav a.nav-link.register-link:hover {
+            background-color: #ffffff;
+            color: #001e50 !important;
+        }
+
+        /* Header Styles */
+        header {
+            background: url('/css/images/VW_NGW6_Homepage.jpg') center/cover no-repeat fixed;
+            color: #ffffff;
+            text-align: center;
+            padding: 100px 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        header button {
+            background-color: #e28743;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        header button:hover {
+            background-color: #c4632b;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar Section -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="#">
+        <img th:src="@{/css/images/vw_logo.png}" alt="Knight Logo" style="max-height: 60px;">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="">Home</a>
+            </li>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link register-link" th:href="@{/api/users/register}">Register</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<!-- Header Section with Transparent Overlay -->
+<header id="home" style="position: relative;">
+    <!-- Transparent Black Overlay -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);"></div>
+
+    <!-- Content within the Header -->
+    <div style="position: relative; z-index: 1; color: #ffffff; text-align: center; padding: 100px 20px; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+
+        <!-- Larger Heading -->
+        <h1 style="font-size: 3.5rem; margin-bottom: 20px;">Welcome to <span style="color: #001e50;">Volkswagen</span></h1>
+
+        <!-- Larger and Styled Paragraph -->
+        <p style="font-size: 1.5rem; line-height: 2; max-width: 600px; margin-bottom: 30px;">2024 Taos 0% APR* for 60 months.
+            For well qualified customers.
+
+        </p>
+
+        <!-- Styled Button -->
+        <a href="/api/users/login">
+            <button style="background-color: transparent; color: #001e50; border: 2px solid #001e50; border-radius: 12px; padding: 15px 30px; font-size: 12px; cursor: pointer; transition: background-color 0.3s, color 0.3s;" onmouseover="this.style.backgroundColor='#001e50'; this.style.color='#ffffff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffff';">Get Started Now</button>
+        </a>
+
+    </div>
+
+</header>
+
+</body>
+
+</html>

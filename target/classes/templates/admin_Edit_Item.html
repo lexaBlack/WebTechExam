@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png"  href="/css/images/vw_logo.png">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Requested Items - Urban Gear</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include jCarousel CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jcarousel/0.3.0/jquery.jcarousel.min.css" rel="stylesheet"
+          type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/@boxicons/css@2.0.7/dist/boxicons.min.css" rel="stylesheet">
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          integrity="sha384-ezCjGA5h02QnmfUnqDRA3eWJwaf16OAcNljUf8h7u0Lei6UllB3SbcqAtfQTtuHs" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+
+    <style>
+        /* Your custom styles */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+                /* Navbar Styles */
+        nav {
+            background-color: #001e50;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        nav a.navbar-brand,
+        nav a.nav-link {
+            color: #ffffff;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a.nav-link:hover {
+            color: #e28743; /* Changed the hover color */
+        }
+
+        nav a.nav-link.register-link {
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            border-radius: 5px;
+            padding: 5px 10px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav a.nav-link.register-link:hover {
+            background-color: #ffffff;
+            color: #001e50 !important;
+        }
+
+        nav .navbar-nav .nav-item {
+            margin-right: 15px; /* Add spacing between nav items */
+        }
+
+        nav .navbar-nav .nav-item a {
+            border: 2px solid #ffffff; /* Add border around each link */
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        nav .navbar-nav .nav-item a:hover {
+            border-color: #e28743;
+        }
+
+        .home-section {
+            position: relative;
+            background: #E4E9F7;
+            min-height: 100vh;
+            top: 0;
+            transition: all 0.5s ease;
+            z-index: 2;
+        }
+
+        .home-section .text {
+            display: inline-block;
+            color: #11101d;
+            font-size: 25px;
+            font-weight: 500;
+            margin: 18px;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" th:href="@{/admin/welcomeAdmin}">
+        <img th:src="@{/css/images/vw_logo.png}" alt="Logo" style="max-height: 60px;">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a th:href="@{/admin/insert}" class="nav-link">
+                    <i class='bx bx-plus'></i>
+                    <span class="links_name">Insert Item</span>
+                </a>
+                <span class="tooltip">Insert Item</span>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/inventory}" class="nav-link">
+                    <i class='bx bx-list-ul'></i>
+                    <span class="links_name">List of Items</span>
+                </a>
+                <span class="tooltip">List of Items</span>
+            </li>
+            <li class="nav-item active">
+                <a th:href="@{/admin/requested}" class="nav-link">
+                    <i class='bx bx-check-double'></i>
+                    <span class="links_name">Manage orders</span>
+                </a>
+                <span class="tooltip">Manage orders</span>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/contacted}" class="nav-link">
+                    <i class='bx bx-check'></i>
+                    <span class="links_name">Received Messages</span>
+                </a>
+                <span class="tooltip">Received Messages</span>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/api/users/login}" class="nav-link">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Logout</span>
+                </a>
+                <span class="tooltip">Logout</span>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<!-- Edit car Form -->
+<section>
+    <!-- Main content -->
+    <div class="home-section">
+        <div class="text">Edit Item</div>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <!-- Edit car Form -->
+                    <form action="/admin/saveEditedcar" enctype="multipart/form-data" id="editcarForm" method="post"
+                          th:object="${car}">
+                        <!-- Add a hidden field for id -->
+                        <div class="form-group">
+                            <label for="itemId">Item Id</label>
+                            <input class="form-control" id="itemId" name="itemId" th:field="*{id}" type="text"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="itemName">Item Name</label>
+                            <input class="form-control" id="itemName" name="itemName" placeholder="Enter item name"
+                                   required th:field="*{itemName}" type="text">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="itemDescription">Item Description</label>
+                            <textarea class="form-control" id="itemDescription" name="itemDescription"
+                                      placeholder="Enter item description" required rows="3"
+                                      th:field="*{description}"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="itemPrice">Item Price</label>
+                            <input class="form-control" id="itemPrice" name="itemPrice" placeholder="Enter item price"
+                                   required th:field="*{price}" type="number">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="itemCategory">Item Category</label>
+                            <select class="form-control" id="itemCategory" name="itemCategory" required
+                                    th:field="*{category}">
+                                <option disabled selected value="">Select item category</option>
+                                <option value="Safety cars">Safety cars</option>
+                                <option value="Sport cars">Sport cars</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
+
+                        <!-- Display current image -->
+                        <label>Current saved Image</label><br>
+                        <img alt="Current Image" class="img-fluid" id="currentItemImage"
+                             style="max-width: 100%; max-height: 200px;" th:src="${base64Image}">
+
+
+                        <!-- Allow user to upload a new image -->
+                        <div class="form-group">
+                            <label>Update Item Image</label>
+                            <div class="custom-file">
+                                <input accept="image/*" class="custom-file-input" id="itemImageInput" name="itemImage"
+                                       onchange="handleImageUpload(event)" type="file">
+                                <label class="custom-file-label" for="itemImageInput">Choose new image</label>
+                            </div>
+                            <div class="mt-3">
+                                <img alt="Image Preview" class="img-fluid" id="itemImagePreview"
+                                     style="max-width: 100%; max-height: 200px; display: none;">
+                                <i class="fas fa-image fa-3x text-muted" id="imagePlaceholder"></i>
+                            </div>
+                        </div>
+                        <!-- Submit button to save changes -->
+                        <button class="btn btn-success" type="submit">Save Changes</button>
+
+                        <!-- Close button without saving changes -->
+                        <a th:href="@{/admin/inventory}">
+                            <button class="btn btn-danger" type="button">Close</button>
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Bootstrap and jCarousel scripts -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- Include jCarousel JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jcarousel/0.3.0/jquery.jcarousel.min.js"
+        type="text/javascript"></script>
+<!-- Your custom scripts -->
+<script th:src="@{/js/script.js}"></script>
+
+</body>
+
+</html>

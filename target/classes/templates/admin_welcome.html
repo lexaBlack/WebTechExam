@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png"  href="/css/images/vw_logo.png">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Admin Welcome</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include jCarousel CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jcarousel/0.3.0/jquery.jcarousel.min.css" rel="stylesheet"
+          type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/@boxicons/css@2.0.7/dist/boxicons.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styles */
+        nav {
+            background-color: #001e50;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        nav a.navbar-brand,
+        nav a.nav-link {
+            color: #ffffff;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a.nav-link:hover {
+            color: #e28743; /* Changed the hover color */
+        }
+
+        nav a.nav-link.register-link {
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            border-radius: 5px;
+            padding: 5px 10px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav a.nav-link.register-link:hover {
+            background-color: #ffffff;
+            color: #001e50 !important;
+        }
+
+        nav .navbar-nav .nav-item {
+            margin-right: 15px; /* Add spacing between nav items */
+        }
+
+        nav .navbar-nav .nav-item a {
+            border: 2px solid #ffffff; /* Add border around each link */
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        nav .navbar-nav .nav-item a:hover {
+            border-color: #e28743;
+        }
+
+        /* Header Styles */
+        header {
+            background: url('/css/images/slide2.png') center/cover no-repeat fixed;
+            color: #ffffff;
+            text-align: center;
+            padding: 100px 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        header button {
+            background-color: #e28743;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        header button:hover {
+            background-color: #c4632b;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" th:href="@{/admin/welcomeAdmin}">
+        <img th:src="@{/css/images/vw_logo.png}" alt="Logo" style="max-height: 60px;">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a th:href="@{/admin/insert}" class="nav-link">
+                    <i class='bx bx-plus'></i>
+                    <span class="links_name">Insert Item</span>
+                </a>
+                <span class="tooltip">Insert Item</span>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/inventory}" class="nav-link">
+                    <i class='bx bx-list-ul'></i>
+                    <span class="links_name">List of Items</span>
+                </a>
+                <span class="tooltip">List of Items</span>
+            </li>
+            <li class="nav-item active">
+                <a th:href="@{/admin/requested}" class="nav-link">
+                    <i class='bx bx-check-double'></i>
+                    <span class="links_name">Manage orders</span>
+                </a>
+                <span class="tooltip">Manage orders</span>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/contacted}" class="nav-link">
+                    <i class='bx bx-check'></i>
+                    <span class="links_name">Received Messages</span>
+                </a>
+                <span class="tooltip">Received Messages</span>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/api/users/login}" class="nav-link">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Logout</span>
+                </a>
+                <span class="tooltip">Logout</span>
+            </li>
+        </ul>
+    </div>
+</nav>
+<header id="home" style="position: relative;">
+    <!-- Transparent Black Overlay -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);"></div>
+
+    <!-- Content within the Header -->
+    <div style="position: relative; z-index: 1; color: #ffffff; text-align: center; padding: 100px 20px; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+
+        <!-- Larger Heading -->
+        <h1 style="font-size: 3.5rem; margin-bottom: 20px;">Welcome to <span style="color: #001e50;"><b>Volkswagen </b></span><span style="color: #ffff;">Admin</span></h1>
+
+        <!-- Larger and Styled Paragraph -->
+        <p style="font-size: 1.5rem; line-height: 2; max-width: 600px; margin-bottom: 30px;">2024 Taos 0% APR* for 60 months.
+            For well qualified customers.
+
+        </p>
+
+        <!-- Styled Button -->
+        <a th:href="@{/admin/inventory}">
+            <button style="background-color: transparent; color: #001e50; border: 2px solid #001e50; border-radius: 12px; padding: 15px 30px; font-size: 12px; cursor: pointer; transition: background-color 0.3s, color 0.3s;" onmouseover="this.style.backgroundColor='#001e50'; this.style.color='#ffffff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffff';">View All Cars On Sell</button>
+        </a>
+
+    </div>
+
+</header>
+
+<!-- Bootstrap and jCarousel scripts -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- Include jCarousel JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jcarousel/0.3.0/jquery.jcarousel.min.js"
+        type="text/javascript"></script>
+<!-- Your custom scripts -->
+<script th:src="@{/js/script.js}"></script>
+
+</body>
+
+</html>

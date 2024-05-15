@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png"  href="/css/images/vw_logo.png">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Admin Dashboard</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include jCarousel CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jcarousel/0.3.0/jquery.jcarousel.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/@boxicons/css@2.0.7/dist/boxicons.min.css" rel="stylesheet">
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-ezCjGA5h02QnmfUnqDRA3eWJwaf16OAcNljUf8h7u0Lei6UllB3SbcqAtfQTtuHs" rel="stylesheet">
+    <style>
+        /* Your custom styles */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        /* Navbar Styles */
+        nav {
+            background-color: #001e50;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        nav a.navbar-brand,
+        nav a.nav-link {
+            color: #ffffff;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a.nav-link:hover {
+            color: #e28743;
+        }
+
+        nav a.nav-link.register-link {
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            border-radius: 5px;
+            padding: 5px 10px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav a.nav-link.register-link:hover {
+            background-color: #ffffff;
+            color: #001e50 !important;
+        }
+
+        nav .navbar-nav .nav-item {
+            margin-right: 15px;
+        }
+
+        nav .navbar-nav .nav-item a {
+            border: 2px solid #ffffff;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        nav .navbar-nav .nav-item a:hover {
+            border-color: #e28743;
+        }
+
+        .home-section {
+            position: relative;
+            background: #E4E9F7;
+            min-height: 100vh;
+            padding-top: 70px;
+            transition: all 0.5s ease;
+            z-index: 2;
+        }
+
+        .home-section .text {
+            display: inline-block;
+            color: #11101d;
+            font-size: 25px;
+            font-weight: 500;
+            margin: 18px;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            border-radius: 0.25rem;
+        }
+
+        .custom-file-label::after {
+            content: "Browse";
+        }
+
+        #itemImagePreview {
+            margin-top: 10px;
+            max-width: 100%;
+            max-height: 200px;
+            display: none;
+        }
+
+        #imagePlaceholder {
+            font-size: 3rem;
+            color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" th:href="@{/admin/welcomeAdmin}">
+        <img th:src="@{/css/images/vw_logo.png}" alt="Logo" style="max-height: 60px;">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a th:href="@{/admin/insert}" class="nav-link">
+                    <i class='bx bx-plus'></i>
+                    <span class="links_name">Insert Item</span>
+                </a>
+                <span class="tooltip">Insert Item</span>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/inventory}" class="nav-link">
+                    <i class='bx bx-list-ul'></i>
+                    <span class="links_name">List of Items</span>
+                </a>
+                <span class="tooltip">List of Items</span>
+            </li>
+            <li class="nav-item active">
+                <a th:href="@{/admin/requested}" class="nav-link">
+                    <i class='bx bx-check-double'></i>
+                    <span class="links_name">Manage orders</span>
+                </a>
+                <span class="tooltip">Manage orders</span>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/contacted}" class="nav-link">
+                    <i class='bx bx-check'></i>
+                    <span class="links_name">Received Messages</span>
+                </a>
+                <span class="tooltip">Received Messages</span>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/api/users/login}" class="nav-link">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Logout</span>
+                </a>
+                <span class="tooltip">Logout</span>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<section class="home-section">
+    <div class="text">Insert Item</div>
+    <div class="container mt-5">
+        <!-- Insert Item Form -->
+        <form action="/admin/insertItem" enctype="multipart/form-data" id="insertItemForm" method="post">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="itemName">Item Name</label>
+                    <input type="text" class="form-control" id="itemName" name="itemName" placeholder="Enter item name" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="itemPrice">Item Price</label>
+                    <input type="number" class="form-control" id="itemPrice" name="itemPrice" placeholder="Enter item price" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="itemDescription">Item Description</label>
+                <textarea class="form-control" id="itemDescription" name="itemDescription" placeholder="Enter item description" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="itemCategory">Item Category</label>
+                <select class="form-control" id="itemCategory" name="itemCategory" required>
+                    <option disabled selected value="">Select item category</option>
+                    <option value="SUV">SUV</option>
+                    <option value="Crossover">Crossover</option>
+                    <option value="Sedan">Sedan</option>
+                    <option value="Hatchback">Hatchback</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="itemImage">Item Image</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="itemImageInput" name="itemImage" accept="image/*" onchange="handleImageUpload(event)" required>
+                    <label class="custom-file-label" for="itemImageInput">Choose file</label>
+                </div>
+                <div class="mt-3">
+                    <img id="itemImagePreview" class="img-fluid" alt="Image Preview">
+                    <i class="fas fa-image fa-3x text-muted" id="imagePlaceholder"></i>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Insert Item</button>
+        </form>
+    </div>
+</section>
+
+<!-- Bootstrap and jCarousel scripts -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- Include jCarousel JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jcarousel/0.3.0/jquery.jcarousel.min.js" type="text/javascript"></script>
+<!-- Your custom scripts -->
+<script th:src="@{/js/script.js}"></script>
+<script>
+    // Handle image upload and preview
+    function handleImageUpload(event) {
+        const input = event.target;
+        const preview = document.getElementById('itemImagePreview');
+        const placeholder = document.getElementById('imagePlaceholder');
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                placeholder.style.display = 'none';
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Homapage</title>
+    <link rel="icon" type="image/png"  href="/css/images/vw_logo.png">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-type"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>
+    <!--[if lte IE 6]>
+    <style type="text/css" media="screen">.tabbed {
+        height: 420px;
+
+    }</style><![endif]-->
+    <script th:src="@{/js/jquery-1.4.1.min.js}" type="text/javascript"></script>
+    <script th:src="@{/js/jquery.jcarousel.pack.js}" type="text/javascript"></script>
+    <script th:src="@{/js/jquery.slide.js}" type="text/javascript"></script>
+    <script th:src="@{/js/jquery-func.js}" type="text/javascript"></script>
+
+
+
+</head>
+<body>
+<!-- Top -->
+<div id="top">
+    <div class="shell">
+        <!-- Header -->
+        <div id="header">
+            <a class="navbar-brand" th:href="@{/web/home}">
+                <img th:src="@{/css/images/vw_logo.png}" alt="Volkswagen" style="max-height: 60px;">
+            </a>
+            <div id="navigation">
+                <ul>
+                    <li><a th:href="@{/web/home}">Home</a></li>
+                    <li><a th:href="@{/web/checkout}">Checkout</a></li>
+                    <li><a th:href="@{/web/contact}">Contact</a></li>
+                    <li class="last">
+                        <a th:href="@{/web/logout}" onclick="clearSessionStorage();">Logout</a>
+                    </li>
+
+                    <!-- Additional profile list item -->
+                    <li style="display: flex; align-items: center; margin-left: 20px;">
+                        <img th:src="@{/css/images/profileLogo.png}" alt="User Icon" style="width: 20px; height: 20px; margin-right: 5px;">
+                        <span style="font-size: 14px; color: #FFA500" th:text="${session.username}">Not logged in</span>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="header_img">
+    <a class="navbar-brand" href="#">
+        <img th:src="@{/css/images/VW.png}" alt="Logo" style="max-height: 200px;">
+    </a>
+</div>
+<!-- Top -->
+<!-- Main -->
+<div id="main">
+    <div class="shell">
+        <!-- Search, etc -->
+        <div class="options">
+            <img th:src="@{/css/images/vw_logo.png}" alt="Logo" style="max-height: 50px; margin-right: 5px; ">
+            <!-- Search -->
+            <div class="search">
+                <form action="#" method="post">
+                    <input class="search-input" type="text" placeholder="Search"/>
+                    <button class="search-button" type="submit">Search</button>
+                </form>
+            </div>
+            <!-- Send a Message -->
+            <div class="send-message">
+                <a class="send-message-link" href="@{/web/contact}">Send a Message</a>
+            </div>
+            <!-- Cart -->
+            <div class="cart">
+                <a class="cart-icon" th:href="@{/web/checkout}" onclick="addToCart()"></a>
+                <div class="cart-details">
+                    <strong id="cart-total" class="cart-total" style="font-size: 13px;">Rwf 0.00</strong>
+                    <span id="cart-count" class="cart-items">(<b>0</b> items)</span>
+                </div>
+                <div class="cart-links">
+                    <a th:href="@{/web/checkout}">Checkout</a>
+                    <a th:href="@{/web/checkout}">Details</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- End Search, etc -->
+
+        <!-- Content -->
+        <div id="content">
+            <!-- Tabs -->
+            <div class="tabs">
+                <ul>
+                    <li><a class="active" href="#"><span>Crossover Cars</span></a></li>
+                    <li><a href="#"><span>SUV Cars</span></a></li>
+                    <li><a href="#"><span>Sedan Cars</span></a></li>
+                    <li><a href="#"><span>Hatchback Cars</span></a></li>
+                    <li><a class="red" href="#"><span>All Cars</span></a></li>
+                </ul>
+            </div>
+            <!-- Tabs -->
+            <!-- Container -->
+            <div id="container">
+                <!-- Safety cars Tab Content -->
+                <div class="tab-content" style="display:block;">
+                    <div class="items">
+                        <div class="cl">&nbsp;</div>
+                        <ul>
+                            <!-- Use Thymeleaf iteration to display crossoverCars -->
+                            <li th:each="car, iterationStatus : ${crossoverCars}" style="display: flex; flex-direction: column; align-items: center;">
+                                <div class="image">
+                                    <a href="#">
+                                        <img class="img" th:src="${crossoverCarsImages[iterationStatus.index]}" alt="car Image" style="width: 115px; height: 85px;" />
+                                    </a>
+                                </div>
+                                <!-- Add to Cart section -->
+                                <p style="text-align: center;">
+                                    <b>Item Name: </b><span class="item-name" th:text="${car.itemName}"></span><br/>
+                                    Description: <span class="item-description" th:text="${car.description}"></span><br/>
+                                    <b>Price: </b><span th:text="${car.price}" class="item-price" style="display: inline;"></span><span style="display: inline;"> <b>RWF</b></span>
+                                    <span  style="cursor: pointer; display: inline-block; margin-top: 10px; text-decoration: none; color: black;">
+                                        <h5 style="display: inline-block; margin-left: 5px; font-size: 1.2em;">
+                                            <span class="add-to-cart" onmouseover="this.style.textDecoration='underline'; this.style.color='#FFA500'; this.style.cursor='pointer';"
+                                                  onmouseout="this.style.textDecoration='none'; this.style.color='black'; this.style.cursor='default';">
+                                                Add to Cart
+                                            </span>
+                                            <span style="font-size: 1.5em;">🛒</span>
+                                        </h5>
+                                    </span>
+
+
+                                </p>
+                            </li>
+                        </ul>
+                        <div class="cl">&nbsp;</div>
+                    </div>
+                </div>
+                <!-- End Safety cars Tab Content -->
+
+
+                <!-- suvCars Tab Content -->
+                <div class="tab-content">
+                    <div class="items">
+                        <div class="cl">&nbsp;</div>
+                        <!-- Use Thymeleaf iteration to display Sport cars -->
+                        <ul>
+                            <li th:each="car, iterationStatus : ${suvCars}" style="display: flex; flex-direction: column; align-items: center;">
+                                <div class="image">
+                                    <a href="#">
+                                        <img class="img" th:src="${suvCarsImages[iterationStatus.index]}" alt="car Image" style="width: 145px; height: 85px;" />
+                                    </a>
+                                    <!-- Add to Cart section -->
+                                    <p style="text-align: center;">
+                                        <b>Item Name: </b><span class="item-name" th:text="${car.itemName}"></span><br/>
+                                        Description: <span class="item-description" th:text="${car.description}"></span><br/>
+                                        <b>Price: </b><span th:text="${car.price}" class="item-price" style="display: inline;"></span><span style="display: inline;"> <b>RWF</b></span>
+                                        <span  style="cursor: pointer; display: inline-block; margin-top: 10px; text-decoration: none; color: black;">
+                                        <h5 style="display: inline-block; margin-left: 5px; font-size: 1.2em;">
+                                            <span class="add-to-cart" onmouseover="this.style.textDecoration='underline'; this.style.color='#FFA500'; this.style.cursor='pointer';"
+                                                  onmouseout="this.style.textDecoration='none'; this.style.color='black'; this.style.cursor='default';">
+                                                Add to Cart
+                                            </span>
+                                            <span style="font-size: 1.5em;">🛒</span>
+                                        </h5>
+                                    </span>
+
+
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="cl">&nbsp;</div>
+                    </div>
+                </div>
+                <!-- End Sport cars Tab Content -->
+                <!-- sedanCars Tab Content -->
+                <div class="tab-content" style="display:block;">
+                    <div class="items">
+                        <div class="cl">&nbsp;</div>
+                        <ul>
+                            <!-- Use Thymeleaf iteration to display crossoverCars -->
+                            <li th:each="car, iterationStatus : ${sedanCars}" style="display: flex; flex-direction: column; align-items: center;">
+                                <div class="image">
+                                    <a href="#">
+                                        <img class="img" th:src="${sedanCarsImages[iterationStatus.index]}" alt="car Image" style="width: 115px; height: 85px;" />
+                                    </a>
+                                </div>
+                                <!-- Add to Cart section -->
+                                <p style="text-align: center;">
+                                    <b>Item Name: </b><span class="item-name" th:text="${car.itemName}"></span><br/>
+                                    Description: <span class="item-description" th:text="${car.description}"></span><br/>
+                                    <b>Price: </b><span th:text="${car.price}" class="item-price" style="display: inline;"></span><span style="display: inline;"> <b>RWF</b></span>
+                                    <span  style="cursor: pointer; display: inline-block; margin-top: 10px; text-decoration: none; color: black;">
+                                        <h5 style="display: inline-block; margin-left: 5px; font-size: 1.2em;">
+                                            <span class="add-to-cart" onmouseover="this.style.textDecoration='underline'; this.style.color='#FFA500'; this.style.cursor='pointer';"
+                                                  onmouseout="this.style.textDecoration='none'; this.style.color='black'; this.style.cursor='default';">
+                                                Add to Cart
+                                            </span>
+                                            <span style="font-size: 1.5em;">🛒</span>
+                                        </h5>
+                                    </span>
+
+
+                                </p>
+                            </li>
+                        </ul>
+                        <div class="cl">&nbsp;</div>
+                    </div>
+                </div>
+                <!-- End Safety cars Tab Content -->
+
+
+                <!-- hatchbackCars Tab Content -->
+                <div class="tab-content">
+                    <div class="items">
+                        <div class="cl">&nbsp;</div>
+                        <!-- Use Thymeleaf iteration to display Sport cars -->
+                        <ul>
+                            <li th:each="car, iterationStatus : ${hatchbackCars}" style="display: flex; flex-direction: column; align-items: center;">
+                                <div class="image">
+                                    <a href="#">
+                                        <img class="img" th:src="${hatchbackCarsImages[iterationStatus.index]}" alt="car Image" style="width: 145px; height: 85px;" />
+                                    </a>
+                                    <!-- Add to Cart section -->
+                                    <p style="text-align: center;">
+                                        <b>Item Name: </b><span class="item-name" th:text="${car.itemName}"></span><br/>
+                                        Description: <span class="item-description" th:text="${car.description}"></span><br/>
+                                        <b>Price: </b><span th:text="${car.price}" class="item-price" style="display: inline;"></span><span style="display: inline;"> <b>RWF</b></span>
+                                        <span  style="cursor: pointer; display: inline-block; margin-top: 10px; text-decoration: none; color: black;">
+                                        <h5 style="display: inline-block; margin-left: 5px; font-size: 1.2em;">
+                                            <span class="add-to-cart" onmouseover="this.style.textDecoration='underline'; this.style.color='#FFA500'; this.style.cursor='pointer';"
+                                                  onmouseout="this.style.textDecoration='none'; this.style.color='black'; this.style.cursor='default';">
+                                                Add to Cart
+                                            </span>
+                                            <span style="font-size: 1.5em;">🛒</span>
+                                        </h5>
+                                    </span>
+
+
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="cl">&nbsp;</div>
+                    </div>
+                </div>
+                <!-- End Sport cars Tab Content -->
+
+                <!-- More cars Tab Content -->
+                <div class="tab-content">
+                    <div class="items">
+                        <div class="cl">&nbsp;</div>
+                        <ul>
+                            <!-- Use Thymeleaf iteration to display More cars -->
+                            <!-- Add to Cart section -->
+                            <li th:each="car, iterationStatus : ${allCars}" style="display: flex; flex-direction: column; align-items: center;">
+                                <div class="image">
+                                    <a href="#">
+                                        <img class="img" th:src="${allCarsImages[iterationStatus.index]}" alt="car Image" style="width: 125px; height: 85px;" />
+                                    </a>
+                                </div>
+                                <!-- Add to Cart section -->
+                                <p style="text-align: center;">
+                                    <b>Item Name: </b><span class="item-name" th:text="${car.itemName}"></span><br/>
+                                    Description: <span class="item-description" th:text="${car.description}"></span><br/>
+                                    <b>Price: </b><span th:text="${car.price}" class="item-price" style="display: inline;"></span><span style="display: inline;"> <b>RWF</b></span>
+                                    <span  style="cursor: pointer; display: inline-block; margin-top: 10px; text-decoration: none; color: black;">
+                                        <h5 style="display: inline-block; margin-left: 5px; font-size: 1.2em;">
+                                            <span class="add-to-cart" onmouseover="this.style.textDecoration='underline'; this.style.color='#FFA500'; this.style.cursor='pointer';"
+                                                  onmouseout="this.style.textDecoration='none'; this.style.color='black'; this.style.cursor='default';">
+                                                Add to Cart
+                                            </span>
+                                            <span style="font-size: 1.5em;">🛒</span>
+                                        </h5>
+                                    </span>
+
+
+                                </p>
+                            </li>
+
+                        </ul>
+                        <div class="cl">&nbsp;</div>
+                    </div>
+                </div>
+                <!-- End More cars Tab Content -->
+            </div><div class="tabbed">
+
+            <!-- Footer -->
+            <div id="footer">
+                <div class="left"><a th:href="@{/web/home}">Home</a> <span>|</span> <a th:href="@{/web/contact}">Contact</a>
+                    <span>|</span> <a th:href="@{/web/checkout}">Checkout</a> <span>|</span> <a th:href="@{/web/logout}">Logout</a></div>
+                <div class="right"> &copy; Designed by <a
+                        href="#">Muvunyi Arsene</a></div>
+            </div>
+            <!-- End Footer -->
+        </div>
+            <!-- End Container -->
+        </div>
+        <!-- End Content -->
+    </div>
+</div>
+<!-- End Main -->
+<script type="text/javascript" th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+
+
+        // Function to handle 'Add to Cart' span click
+        function handleAddToCartClick(addToCartSpan) {
+            // Find the closest 'li' parent element
+            var listItem = addToCartSpan.closest('li');
+            // Extract the numeric value from the item price within the closest 'li' element
+            var priceElement = listItem.querySelector('.item-price');
+            var priceText = priceElement.textContent;
+            var price = parseFloat(priceText.replace(/[^\d.]/g, ''));
+            var descriptionElement = listItem.querySelector('.item-description');
+            var description = descriptionElement.textContent;
+            var itemNameElement = listItem.querySelector('.item-name');
+            var itemName = itemNameElement.textContent;
+            var imageElement = listItem.querySelector('.img');
+            var imageSrc = imageElement.getAttribute('src');  // Retrieve image source using getAttribute
+
+            // Retrieve the existing cart items from session storage
+            var cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || [];
+
+            // Add the new item to the cart items array
+            var newItem = {
+                id: generateItemId(), // You need a function to generate a unique item ID
+                image: imageSrc,
+                brandVersion: itemName,      // Assuming itemName is the brandVersion
+                description: description,
+                price: price.toFixed(2), // Format the price to two decimal places
+                // Add other properties as needed
+            };
+
+            cartItems.push(newItem);
+
+            // Update session storage with the modified cart items
+            sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
+            // Increment the total amount
+            totalAmount += price;
+            // Update the cart total text
+            cartTotal.textContent = 'Rwf ' + totalAmount.toFixed(2);
+            // Increment the selected items count
+            selectedItemsCount++;
+            // Update the cart count text
+            cartCount.innerHTML = '(' + '<strong>' + selectedItemsCount + '</strong>' + ' items)';
+
+            // Store the updated values in session storage
+            sessionStorage.setItem('cartTotal', totalAmount.toFixed(2));
+            sessionStorage.setItem('selectedItemsCount', selectedItemsCount);
+            // Store the updated values in session storage
+
+
+        }
+
+        // Function to attach click event listener to 'Add to Cart' spans
+        function attachAddToCartClickEventListeners() {
+            var addToCartSpans = document.querySelectorAll('.add-to-cart');
+            addToCartSpans.forEach(function (addToCartSpan) {
+                addToCartSpan.addEventListener('click', function (event) {
+                    // Prevent the event from propagating up the DOM
+                    event.stopPropagation();
+                    // Call the function to handle 'Add to Cart' span click
+                    handleAddToCartClick(addToCartSpan);
+                });
+            });
+        }
+
+        // Get the common ancestor for all 'Add to Cart' spans
+        var itemsContainer = document.getElementById('container');
+        // Get the cart total element
+        var cartTotal = document.getElementById('cart-total');
+        // Get the cart count element
+        var cartCount = document.getElementById('cart-count');
+
+        // Retrieve the values from session storage and update the cart
+        var totalAmount = parseFloat(sessionStorage.getItem('cartTotal')) || 0;
+        var selectedItemsCount = parseInt(sessionStorage.getItem('selectedItemsCount')) || 0;
+
+        // Update the cart total text and cart count text
+        cartTotal.textContent = 'Rwf ' + totalAmount.toFixed(2);
+        cartCount.innerHTML = '(' + '<strong>' + selectedItemsCount + '</strong>' + ' items)';
+
+        // Add click event listener to the common ancestor
+        itemsContainer.addEventListener('click', function (event) {
+            // Check if the clicked element has the class 'add-to-cart'
+            if (event.target.classList.contains('add-to-cart')) {
+                // Call the function to handle 'Add to Cart' span click
+                handleAddToCartClick(event.target);
+            }
+        });
+
+        // Attach initial click event listeners for 'Add to Cart' spans
+        attachAddToCartClickEventListeners();
+    });
+
+    function generateItemId() {
+        // Combine timestamp with a random number for better uniqueness
+        return 'item_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+    }
+
+
+    function clearSessionStorage() {
+        sessionStorage.clear();
+    }
+</script>
+
+
+</body>
+</html>

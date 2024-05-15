@@ -1,0 +1,422 @@
+* {
+    padding: 0;
+    margin: 0;
+    outline: 0;
+}
+
+body {
+    background: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    line-height: 17px;
+    color: #6f6e6e;
+}
+
+input, textarea, select {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: #333;
+}
+
+textarea {
+    overflow: auto;
+}
+
+a img {
+    border: 0;
+}
+
+a {
+    color: #890000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover {
+    color: #333;
+}
+
+.left, .alignleft {
+    float: left;
+    display: inline;
+}
+
+.right, .alignright {
+    float: right;
+    display: inline;
+}
+
+.cl {
+    font-size: 0;
+    line-height: 0;
+    clear: both;
+    display: block;
+    height: 0;
+}
+
+.al {
+    text-align: left;
+}
+
+.ar {
+    text-align: right;
+}
+
+.ac {
+    text-align: center;
+}
+
+h3 {
+    font-size: 15px;
+    line-height: 18px;
+    color: #bcbcbc;
+    text-transform: uppercase;
+}
+
+h1#logo {
+    font-size: 0;
+    line-height: 0;
+    width: 248px;
+    height: 61px;
+    float: left;
+}
+
+h1#logo a {
+    display: block;
+    height: 61px;
+    text-indent: -4000px;
+    background: url(images/vw_logo.png);
+}
+
+#navigation {
+    float: right;
+    white-space: nowrap;
+}
+
+#navigation ul {
+    list-style-type: none;
+    padding-top: 30px;
+}
+
+#navigation ul li {
+    float: left;
+    display: inline;
+    border-right: solid 1px #5f5f5f;
+    padding-right: 8px;
+    margin-right: 8px;
+}
+
+#navigation ul li.last {
+    border-right: 0;
+    padding-right: 0;
+    margin-right: 0;
+}
+
+#navigation ul li a {
+    color: #fff;
+}
+
+#navigation ul li a:hover,
+#navigation ul li a.active {
+    color: #ffd900;
+}
+
+
+.shell {
+    width: 980px;
+    margin: 0 auto;
+}
+
+#top {
+    height: 79px;
+    background: #001e50;
+}
+ .header_img {
+            background: url('/css/images/slide3.png') center/cover no-repeat fixed;
+            color: #ffffff;
+            text-align: center;
+            padding: 100px 0;
+            height: 30vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+#header {
+    height: 61px;
+}
+
+
+#main {
+    width: 100%;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #001e50;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.search {
+    flex: 1; /* Take up remaining space */
+    margin-right: 20px;
+}
+
+.search form {
+    display: flex;
+}
+
+.search-input {
+    flex: 1; /* Take up remaining space */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-button {
+    padding: 10px 20px;
+    background-color: #001e50; /* Primary color */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.send-message a {
+    color: #ffff;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.cart {
+    display: flex;
+    align-items: center;
+}
+
+.cart-icon {
+    width: 20px;
+    height: 20px;
+    background: url('/css/images/shopping-cart-64.png') center/cover no-repeat;
+    margin-right: 10px;
+}
+
+.cart-details {
+    margin-right: 20px;
+    color: #ffff;
+}
+
+.cart-links a {
+    color: #fffff; /* Primary color */
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+/* Hover effect for links */
+.cart-links a:hover,
+.send-message a:hover {
+    text-decoration: underline;
+}
+
+
+#content {
+    padding-top: 20px;
+}
+
+.tabs {
+    margin-top: 20px;
+    border-bottom: 2px solid #001e50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tabs ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.tabs ul li {
+    margin-right: 10px;
+}
+
+.tabs ul li:last-child {
+    margin-right: 0;
+}
+
+.tabs ul li a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 4px 4px 0 0;
+    background-color: #f8f9fa;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.tabs ul li a.active,
+.tabs ul li a:hover {
+    background-color: #001e50;
+    color: #fff;
+}
+
+.tabs ul li a.red {
+    background-color: #dc3545;
+}
+
+.tabs ul li a.red.active,
+.tabs ul li a.red:hover {
+    background-color: #c82333;
+}
+
+
+
+#container {
+    background: #fff url(images/container-t.gif) no-repeat 0 0;
+    padding: 30px 20px;
+}
+
+.items {
+    position: relative;
+    width: 960px;
+    margin-right: -20px;
+    padding-bottom: 5px;
+}
+
+.items ul {
+    list-style-type: none;
+}
+
+.items ul .image {
+    text-align: center;
+}
+
+.items ul li {
+    float: left;
+    border: dashed 1px #cfcfcf;
+    width: 194px;
+    margin: 0 18px 12px 0;
+    padding: 13px;
+}
+
+.items ul li p span {
+    color: #890000
+}
+
+.items ul li p.price {
+    padding-top: 15px;
+}
+
+.items ul li p.price strong {
+    color: #890000;
+    font-size: 14px;
+}
+
+.brands h3 {
+    padding-bottom: 10px;
+}
+
+.brands a {
+    margin-right: 30px;
+}
+
+#footer {
+    border-top: dashed 1px #cfcfcf;
+    margin-top: 20px;
+    padding: 10px 0;
+    color: #8e8e8e;
+}
+
+#footer a {
+    color: #8e8e8e;
+}
+
+#footer a:hover {
+    color: #9d0000;
+}
+
+#footer span {
+    padding: 0 5px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tabbed {
+    min-height: 420px;
+}
+
+
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Styling for Contact Part 1 */
+#contact-part1 {
+    /* Add your styles for the first part of the contact form here */
+}
+
+#contact-part1 h2 {
+    color: #001e50;
+}
+
+#contact-part1 p {
+    line-height: 1.6;
+}
+
+#contact-part1 .bx {
+    color: #28a745;
+}
+
+/* Styling for Contact Part 2 */
+#contact-part2 {
+    /* Add your styles for the second part of the contact form here */
+}
+
+#contact-part2 form {
+    margin-top: 20px;
+}
+
+#contact-part2 .form-group {
+    margin-bottom: 15px;
+}
+
+#contact-part2 input,
+#contact-part2 textarea {
+    width: calc(100% - 22px); /* Adjust the width as needed */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#contact-part2 button {
+    background-color: #001e50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#contact-part2 button:hover {
+    background-color: #0056b3;
+}
