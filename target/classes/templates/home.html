@@ -61,14 +61,14 @@
             <img th:src="@{/css/images/vw_logo.png}" alt="Logo" style="max-height: 50px; margin-right: 5px; ">
             <!-- Search -->
             <div class="search">
-                <form action="#" method="post">
+                <form action="">
                     <input class="search-input" type="text" placeholder="Search"/>
                     <button class="search-button" type="submit">Search</button>
                 </form>
             </div>
             <!-- Send a Message -->
             <div class="send-message">
-                <a class="send-message-link" href="@{/web/contact}">Send a Message</a>
+                <a class="send-message-link" th:href="@{/web/contact}">Send a Message</a>
             </div>
             <!-- Cart -->
             <div class="cart">
@@ -79,7 +79,6 @@
                 </div>
                 <div class="cart-links">
                     <a th:href="@{/web/checkout}">Checkout</a>
-                    <a th:href="@{/web/checkout}">Details</a>
                 </div>
             </div>
         </div>
