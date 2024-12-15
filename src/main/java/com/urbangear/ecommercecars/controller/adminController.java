@@ -14,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -71,35 +73,38 @@ public class adminController {
     }
 
     @GetMapping("/inventory")
-    public String showInventory(Model model, HttpSession session) {
+    public String showInventory(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            Model model,
+            HttpSession session) {
+
         // Check if the admin is logged in
         if (session.getAttribute("session") == null) {
-            // Redirect to the login page if the admin is not logged in
             return "redirect:/admin/error";
         }
-        // Fetch the list of cars from the service
-        List<car> cars = carService.getAllCars();
 
-        // Convert each car's image to Base64 and add it to the model
-        List<String> base64Images = cars.stream()
-                .map(s -> {
-                    byte[] image = s.getImage();
+        // Fetch paginated cars
+        Pageable pageable = PageRequest.of(page, size);
+        Page<car> carPage = carService.getAllCars(pageable);
+
+        // Convert car images to Base64
+        List<String> base64Images = carPage.getContent().stream()
+                .map(car -> {
+                    byte[] image = car.getImage();
                     if (image != null) {
                         return "data:image/png;base64," + Base64.getEncoder().encodeToString(image);
-                    } else {
-                        // Handle the case where the image is null (provide a default or skip)
-                        return "data:image/png;base64,";
                     }
+                    return null;
                 })
                 .collect(Collectors.toList());
 
-        // Add the list of Base64-encoded images to the model
+        model.addAttribute("cars", carPage.getContent());
         model.addAttribute("base64Images", base64Images);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", carPage.getTotalPages());
+        model.addAttribute("pageSize", size);
 
-        // Add the list of cars to the model
-        model.addAttribute("cars", cars);
-
-        // Return the view name
         return "admin_Inventory";
     }
 
@@ -273,4 +278,5 @@ public class adminController {
         }
         return "admin_welcome";
     }
+
 }

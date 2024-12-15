@@ -195,34 +195,42 @@
             </tr>
             </thead>
             <tbody>
-            <!-- Iterate over the list of cars -->
-            <!-- Iterate over the list of cars -->
             <tr th:each="s, idx : ${cars}">
                 <td th:text="${s.id}"></td>
                 <td th:text="${s.itemName}"></td>
                 <td th:text="${s.description}"></td>
-                <td class="text-center" th:text="${s.price}"></td>
-                <td class="text-center" th:text="${s.category}"></td>
-                <td class="text-center">
-                    <!-- Display the image with a default size -->
-                    <img alt="car Image" class="img-fluid" style="width: 85px; height: 50px;"
-                         th:src="${base64Images[idx.index]}">
+                <td th:text="${s.price}"></td>
+                <td th:text="${s.category}"></td>
+                <td>
+                    <img th:src="${base64Images[idx.index]}" alt="Car Image" style="width: 85px; height: 50px;">
                 </td>
-                <td class="text-center">
-                    <!--Edit icon-->
-                    <a style="color:green" th:href="@{'/admin/editItem?id=' + ${s.id}}"><i class="fa-solid fa-pen-to-square ms-4" style="text-align: center;"></i></a>
+                <td>
+                    <a th:href="@{'/admin/editItem?id=' + ${s.id}}" class="btn btn-sm btn-primary">Edit</a>
                 </td>
-
-                <td class="text-center">
-                    <!-- Delete icon with red color and confirmation dialog -->
-                    <a style="color:red" onclick="return confirmDelete();" th:href="@{'/admin/deletecar/' + ${s.id}}"><i class="fa-solid fa-trash ms-4"></i></a>
+                <td>
+                    <a th:href="@{'/admin/deletecar/' + ${s.id}}" onclick="return confirmDelete();" class="btn btn-sm btn-danger">Delete</a>
                 </td>
             </tr>
-
             </tbody>
         </table>
 
+        <!-- Pagination Controls -->
+
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                    <a class="page-link" th:href="@{'/admin/inventory?page=' + (${currentPage} - 1) + '&size=' + ${pageSize}}">Previous</a>
+                </li>
+                <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                    th:classappend="${i == currentPage} ? 'active'">
+                    <a class="page-link" th:href="@{'/admin/inventory?page=' + ${i} + '&size=' + ${pageSize}}" th:text="${i + 1}"></a>
+                </li>
+                <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? 'disabled'">
+                    <a class="page-link" th:href="@{'/admin/inventory?page=' + (${currentPage} + 1) + '&size=' + ${pageSize}}">Next</a>
+                </li>
+            </ul>
+
     </div>
+
 
 </section>
 

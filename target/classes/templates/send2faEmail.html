@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enter Your Email</title>
+  <style>
+        body {
+            background-color: #001e50;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #ffffff;
+        }
+
+        input[type="email"] {
+            padding: 10px;
+            width: 100%;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #f4b400;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #d89e00;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+  <h2>Enter Your Email for 2FA Code</h2>
+  <form action="/api/users/send2FO" method="post">
+    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+    <button type="submit">Send 2FA Code</button>
+  </form>
+
+  <div class="error">
+    <!-- This section can be used to display error messages (optional) -->
+    <!-- Example: -->
+    <!-- <p>Error: Invalid email or code.</p> -->
+  </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify Two-Factor Authentication</title>
+</head>
+<body>
+<h2>Enter the 2FA Code</h2>
+<form action="/api/users/verify-2fa" method="post">
+    <label for="twoFACode">2FA Code:</label>
+    <input type="text" id="twoFACode" name="twoFACode" required>
+    <button type="submit">Verify</button>
+</form>
+</body>
+</html>
